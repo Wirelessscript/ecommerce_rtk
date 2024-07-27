@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeItemFromCart, clearCart, increaseItemQuantity, decreaseItemQuantity } from './CartSlice';
 import './ShoppingCart.css'; 
 
@@ -32,20 +32,19 @@ const ShoppingCart = () => {
         {cartItems.map(item => (
             <li key={item.id} className="cart-item">
                 <span>{item.name} - ${item.price}</span>
-                <div className="quantity=control-btn">
+                <div className="quantity=controls">
                 <button classname="quantity-control-btn" onClick={() => handleDecreaseQuantity(item.id)}>-</button>
                 <span> {item.quantity}</span>
-                <button className="quantity-control-btn" onClick={() => handleIncreaseQuantity(item.id)}>-</button>
+                <button className="quantity-control-btn" onClick={() => handleIncreaseQuantity(item.id)}>+</button>
                 </div>
                 <button className="remove-item-btn" onClick={() => handleRemoveItem(item.id)}>Remove</button>
             </li>
         ))}
       </ul>
-      <button className="clear-cart-btn">Clear Cart</button>
+      <button className="clear-cart-btn" onClick={handleClearCart}>Clear Cart</button>
     </div>
-    <div>{totalAmount? <div> 'The total amount is{totalAmount}</div> : ''}</div>
-  
-    </>
+    <div>{totalAmount? <div>'The total amount is {totalAmount}</div> : ''}</div>
+   </>
   );
 };
 
