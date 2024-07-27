@@ -11,19 +11,19 @@ const CartSlice = createSlice({
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                state.cartItems.push({ ...action.payload, quantity: 1});
+                state.cartItems.push({ ...action.payload, quantity: 1 });
             }
         },
         removeItemFromCart(state, action) {
-            state.cartItems = state.cartItems.filter(item => item.id == action.payload);
+            state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
         },
         clearCart(state) {
             state.cartItems = [];
         },
         increaseItemQuantity(state, action) {
-            const itemToIncrease = state.chart.find(item => item.id ===action.payload);
+            const itemToIncrease = state.cartItems.find(item => item.id ===action.payload);
             if (itemToIncrease) {
-                itemToIncrease.quantity +=1;
+                itemToIncrease.quantity += 1;
             }
         },
         decreaseItemQuantity(state, action) {
@@ -32,6 +32,8 @@ const CartSlice = createSlice({
                 itemToDecrease.quantity -= 1;
             }
         },
+
+        
         }
         
 });
